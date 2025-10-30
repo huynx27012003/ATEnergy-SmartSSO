@@ -1,0 +1,166 @@
+<title>User Center</title>
+<#include "../common/common.html"/>
+
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT BEGINS -->
+		<div>
+			<div id="user-profile-3" class="user-profile row">
+				<div class="col-sm-offset-1 col-sm-10">
+
+					<div class="space"></div>
+
+					<form id="_editForm" class="form-horizontal" validate="true">
+						<div class="tabbable">
+							<ul class="nav nav-tabs padding-16">
+								<li class="active">
+									<a data-toggle="tab" href="#edit-basic">
+										<i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+										Basic Information
+									</a>
+								</li>
+
+								<li>
+									<a data-toggle="tab" href="#edit-password">
+										<i class="blue ace-icon fa fa-key bigger-125"></i>
+										Change Password
+									</a>
+								</li>
+							</ul>
+
+							<div class="tab-content profile-edit-tab-content">
+								<div id="edit-basic" class="tab-pane in active">
+									<h4 class="header blue bolder smaller">Registration Information</h4>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-email">Login Name</label>
+
+										<div class="col-sm-9">
+											<label class="control-label"><b>${user.account}</b></label>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-website">Registration Time</label>
+
+										<div class="col-sm-9">
+											<label class="control-label"><b>${user.createTime ? string("yyyy-MM-dd HH:mm:ss")}</b></label>
+										</div>
+									</div>
+
+									<div class="space"></div>
+									<h4 class="header blue bolder smaller">Login Information</h4>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-email">Name</label>
+
+										<div class="col-sm-9">
+											<label class="control-label"><b>${user.name}</b></label>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-twitter">Total Login Count</label>
+
+										<div class="col-sm-9">
+											<label class="control-label"><b>${user.loginCount}</b></label>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-gplus">Last Login Time</label>
+
+										<div class="col-sm-9">
+											<label class="control-label"><b>${user.lastLoginTime ? string("yyyy-MM-dd HH:mm:ss")}</b></label>
+										</div>
+									</div>
+								</div>
+
+								<div id="edit-password" class="tab-pane">
+									<div class="space-10"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">New Password</label>
+
+										<div class="col-sm-9">
+											<div class="help-validate">
+												<input id="_newPassword" name="newPassword" type="password" value="" class="form-data"
+													   required="true" minlength='6' maxlength='16'/>
+											</div>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">Confirm Password</label>
+
+										<div class="col-sm-9">
+											<div class="help-validate">
+												<input id="_confirmPassword" name="confirmPassword" type="password" value="" class="form-data"
+													   required="true" equalsTo="_newPassword:Passwords do not match" minlength='6' maxlength='16'/>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button id="_submit" type="button" class="btn btn-info" data-loading-text="Submitting...">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Save
+											</button>
+
+											&nbsp; &nbsp;
+											<button id="_reset" class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												Reset
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div><!-- /.span -->
+			</div><!-- /.user-profile -->
+		</div>
+
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<!--[if lte IE 8]>
+<script src="${request.contextPath}/static/assets/js/excanvas.js"></script>
+<![endif]-->
+<script type="text/javascript">
+	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
+		jQuery(function($) {
+			// Submit
+			$("#_submit").click(function(){
+				if($('#_editForm').validate()){
+					var btn = $(this);
+					btn.button('loading');
+					$.post("${request.contextPath}/admin/profile/save-password", $.formJson('_editForm'),function(d) {
+						if(d){
+							btn.button('reset');
+							$("#_reset").click();
+							$.gritter.add({text: d.message});
+						}
+					},'json');
+				}
+			});
+
+			// Bind Enter key
+			$(".form-data").bind('keypress',function(event){
+				if(event.keyCode == "13"){
+					event.preventDefault();
+					$("#_submit").click();
+				}
+			});
+		});
+	});
+</script>

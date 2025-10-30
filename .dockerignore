@@ -1,0 +1,22 @@
+# Maven build output
+**/target/
+
+# VCS and IDE
+.git/
+.gitignore
+.gitattributes
+.idea/
+*.iml
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Node / web build artifacts (if any)
+**/node_modules/
+**/dist/
+**/build/
+
+# Large assets not needed for build
+images/
+

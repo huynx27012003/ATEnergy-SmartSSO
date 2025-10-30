@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>OAuth2 Popup Callback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html, body { height: 100%; margin: 0; font-family: Arial, sans-serif; }
+      .wrap { height: 100%; display: flex; align-items: center; justify-content: center; }
+      .box { color: #444; font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap"><div class="box" id="msg">Processing login...</div></div>
+    <script>
+      (function () {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var code = params.get('code');
+          if (code) {
+            if (window.opener && !window.opener.closed) {
+              window.opener.postMessage({ type: 'smart-sso-oauth', code: code }, '*');
+            }
+            window.close();
+            setTimeout(function(){ document.getElementById('msg').innerText = 'You can close this window.'; }, 300);
+          } else {
+            document.getElementById('msg').innerText = 'Missing authorization code.';
+          }
+        } catch (e) {
+          document.getElementById('msg').innerText = 'Callback error: ' + (e && e.message ? e.message : e);
+        }
+      })();
+    </script>
+  </body>
+  </html>

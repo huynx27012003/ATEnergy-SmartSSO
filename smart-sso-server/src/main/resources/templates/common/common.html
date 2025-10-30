@@ -1,0 +1,50 @@
+<!-- Text input -->
+<link rel="stylesheet" href="${request.contextPath}/static/assets/css/jquery-ui.custom.css" />
+<!-- Multiselect -->
+<link rel="stylesheet" href="${request.contextPath}/static/assets/css/bootstrap-multiselect.css" />
+<!-- Color picker -->
+<link rel="stylesheet" href="${request.contextPath}/static/assets/css/colorpicker.css" />
+<!-- Time picker -->
+<link rel="stylesheet" href="${request.contextPath}/static/assets/css/bootstrap-timepicker.css" />
+<!-- Date, DateTime, Date Range -->
+<link rel="stylesheet" href="${request.contextPath}/static/assets/css/daterangepicker.css" />
+<!-- Notification/Toast -->
+<link rel="stylesheet" href="${request.contextPath}/static/assets/css/jquery.gritter.css" />
+<!-- Drag-and-drop single file upload -->
+<link rel="stylesheet" href="${request.contextPath}/static/assets/css/dropzone.css" />
+<link rel="stylesheet" href="${request.contextPath}/static/assets/css/uploadifive.css" />
+
+<!--[if lte IE 8]>
+	<script src="${request.contextPath}/static/assets/js/excanvas.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    var scripts = [
+        // Form submit -> JSON conversion
+		"${request.contextPath}/static/custom/jquery.form.min.js",
+        // Table/List
+		"${request.contextPath}/static/custom/jquery.table.min.js?v=" + Math.random(),
+        // Time
+		"${request.contextPath}/static/assets/js/date-time/bootstrap-timepicker.js",
+        // Time i18n support
+		"${request.contextPath}/static/assets/js/date-time/moment.js",
+        // Time i18n support
+		"${request.contextPath}/static/assets/js/date-time/i18n/moment.zh-CN.js",
+        // Date range
+		"${request.contextPath}/static/assets/js/date-time/daterangepicker.js",
+        // Confirm dialog
+		"${request.contextPath}/static/assets/js/bootbox.js",
+		"${request.contextPath}/static/custom/assets/bootbox.custom.js",
+        // Auto-hiding notification
+		"${request.contextPath}/static/assets/js/jquery.gritter.js",
+		"${request.contextPath}/static/custom/assets/jquery.gritter.custom.js",
+        // UI
+		"${request.contextPath}/static/assets/js/jquery-ui.custom.js",
+        // File upload
+		"${request.contextPath}/static/assets/js/dropzone.js",
+		"${request.contextPath}/static/assets/js/jquery.uploadifive.min.js",
+		"${request.contextPath}/static/custom/ajaxfileupload.js",
+        // Validation
+		"${request.contextPath}/static/custom/jquery.validate-2.0.min.js",
+		"${request.contextPath}/static/custom/jquery.validate-2.0.custom.min.js"
+	];
+</script>

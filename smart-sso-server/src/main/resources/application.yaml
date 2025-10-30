@@ -1,0 +1,40 @@
+server:
+  port: 8086
+
+logging:
+  level:
+    openjoe.smart.sso.server.mapper: debug #打印sql日志
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  freemarker:
+    suffix: .html
+    request-context-attribute: request
+
+  datasource:
+    url: jdbc:postgresql://192.168.127.250:5433/smart-sso
+    username: postgres
+    password: atenergy
+    driver-class-name: org.postgresql.Driver
+
+  data:
+    redis:
+      host: 103.163.118.212
+      port: 30379
+      password: atenergy123
+      database: 0
+
+
+smart:
+  stage:
+    mybatis-plus:
+      pageDbType: postgresql
+  sso:
+    server-url: http://localhost:8086
+    client-id: 1000
+    client-secret: rokY9BdKh5bHiX/zL26qOg==
+    exclude-urls: /static/*,/sso/*
+    server:
+      timeout: 7200

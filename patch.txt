@@ -1,0 +1,36 @@
+*** Begin Patch
+*** Update File: smart-sso-demo-h5/src/main/resources/static/index.html
+@@
+-        // ????rs????3?ru000f?_??,-???
+-        function goSSOLoginUrl() {
+-            $.getJSON(BASE_URL + '/auth/login_url?redirectUri=' + location.href, function (res) {
+-                window.location.href = res.data;
+-            })
+-        }
++        // Build a clean same-origin redirect (avoid external domains)
++        function getCleanRedirectUri() {
++            return window.location.origin + window.location.pathname;
++        }
++
++        // ????rs????3?ru000f?_??,-???
++        function goSSOLoginUrl() {
++            var redirectBack = getCleanRedirectUri();
++            $.getJSON(BASE_URL + '/auth/login_url?redirectUri=' + redirectBack, function (res) {
++                window.location.href = res.data;
++            })
++        }
+@@
+-        // ????rs????3?o??S???_??????o????
+-        function goSSOLogoutUrl() {
+-            $.getJSON(BASE_URL + '/auth/logout_url?redirectUri=' + location.href, function (res) {
+-                window.location.href = res.data;
+-            })
+-        }
++        // ????rs????3?o??S???_??????o????
++        function goSSOLogoutUrl() {
++            var redirectBack = getCleanRedirectUri();
++            $.getJSON(BASE_URL + '/auth/logout_url?redirectUri=' + redirectBack, function (res) {
++                window.location.href = res.data;
++            })
++        }
+*** End Patch

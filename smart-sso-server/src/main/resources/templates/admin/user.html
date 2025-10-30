@@ -1,0 +1,255 @@
+<title>User Management</title>
+<#include "../common/common.html"/>
+
+<link rel="stylesheet" href="${request.contextPath}/static/custom/zTree/css/metroStyle/metroStyle.css?v=1" />
+<link rel="stylesheet" href="${request.contextPath}/static/custom/zTree/css/metroStyle/metroStyle.custom.css" />
+
+<div class="row">
+	<div class="col-xs-12 col-sm-3">
+		<ul id="_tree" class="ztree" style="width:560px; overflow:auto;"></ul>
+	</div>
+	<div class="col-xs-12 col-sm-9">
+		<div class="widget-box">
+			<div class="widget-header widget-header-small">
+				<h5 class="widget-title lighter">Search Bar</h5>
+			</div>
+
+			<div class="widget-body">
+				<div class="widget-main">
+					<form id="_form" class="form-inline">
+						<input id="_officeId" type="hidden" name="officeId" value="">
+						<label>
+							<label class="control-label" for="form-field-1"> Login Name: </label>
+							<input name="account" type="text" class="form-data input-medium search-data">
+						</label>
+						<label>
+							<label class="control-label" for="form-field-1"> Name: </label>
+					 		<input name="name" type="text" class="form-data input-medium search-data">
+						</label>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div>
+			<div class="dataTables_wrapper form-inline no-footer">
+				<table id="_table" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- page specific plugin scripts -->
+<script type="text/javascript">
+	scripts.push(
+			"${request.contextPath}/static/custom/zTree/js/jquery.ztree.core-3.5.min.js",
+			"${request.contextPath}/static/custom/zTree/js/jquery.ztree.excheck-3.5.min.js"
+	);
+
+	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
+		jQuery(function($) {
+			// Table
+			var $table = $("#_table").table({
+				url : "${request.contextPath}/admin/user/list",
+				formId : "_form",
+				tools : [
+					{
+						text : 'Add New',
+						clazz : 'btn-info',
+						icon : 'fa fa-plus-circle blue',
+						permission : '/admin/user/edit',
+						handler : function(){
+							$.aceRedirect("${request.contextPath}/admin/user/edit?officeId=" + $("#_officeId").val());
+						}
+					},
+					{
+						text : 'Disable',
+						clazz : 'btn-warning',
+						icon : 'fa fa-lock orange',
+						permission : '/admin/user/enable',
+						handler : function(){
+							$table.ajaxEnable({url : "${request.contextPath}/admin/user/enable"}, false);
+						}
+					},
+					{
+						text : 'Enable',
+						clazz : 'btn-success',
+						icon : 'fa fa-unlock green',
+						permission : '/admin/user/enable',
+						handler : function(){
+							$table.ajaxEnable({url : "${request.contextPath}/admin/user/enable"}, true);
+						}
+					},
+					{
+						text : 'Delete',
+						clazz : 'btn-danger',
+						icon : 'fa fa-trash-o red',
+						permission : '/admin/user/delete',
+						handler : function(){
+							$table.ajaxDelete({
+								confirm : "Deleting this user will also remove associated roles and permissions. Are you sure you want to delete?",
+								url : "${request.contextPath}/admin/user/delete"
+							});
+						}
+					},
+					{
+						text : 'Reset Password',
+						clazz : 'btn-default',
+						icon : 'fa fa-key grey',
+						permission : '/admin/user/reset-password',
+						handler : function(){
+							$table.ajax({
+								url : "${request.contextPath}/admin/user/reset-password",
+								confirm : "Confirm password reset?",
+								after : function(){
+									$table.reload();
+								}
+							});
+						}
+					},
+					{
+						text : 'Assign Roles',
+						clazz : 'btn-default',
+						icon : 'fa fa-cog grey',
+						permission : '/admin/user-role',
+						handler : function(){
+							if($table.validateSelected(true)){
+								$.aceRedirect("${request.contextPath}/admin/user-role?userId=" + $table.getSelectedItemKeys("id"));
+							}
+						}
+					}
+				],
+				columns : [
+					{field:'id', hide : true},
+					{field:'isEnable', hide : true},
+					{field:'name', title:'Name', align:'left'},
+					{field:'account', title:'Login Name', align:'left'},
+					{field:'lastLoginTime', title:'Last Login Time', mobileHide : true},
+					{
+						field:'isEnableStr',
+						title:'Enabled',
+						replace : function (d){
+							if(d.isEnable)
+								return "<span class='label label-sm label-success'>Yes</span>";
+							else
+								return "<span class='label label-sm label-warning'>No</span>";
+						}
+					}
+				],
+				operate : [
+					{
+						text : 'Edit',
+						clazz : 'blue',
+						icon : 'fa fa-pencil',
+						permission : '/admin/user/edit',
+						handler : function(d){
+							$.aceRedirect("${request.contextPath}/admin/user/edit?id=" + d.id);
+						}
+					},
+					{
+						text : 'Disable',
+						clazz : 'orange',
+						icon : 'fa fa-lock',
+						permission : '/admin/user/enable',
+						handler : function(){
+							$table.ajaxEnable({url : "${request.contextPath}/admin/user/enable"}, false);
+						},
+						show : function(d){ return d.isEnable; }
+					},
+					{
+						text : 'Enable',
+						clazz : 'green',
+						icon : 'fa fa-unlock',
+						permission : '/admin/user/enable',
+						handler : function(){
+							$table.ajaxEnable({url : "${request.contextPath}/admin/user/enable"}, true);
+						},
+						show : function(d){ return !d.isEnable; }
+					},
+					{
+						text : 'Delete',
+						clazz : 'red',
+						icon : 'fa fa-trash-o',
+						permission : '/admin/user/delete',
+						handler : function(d){
+							$table.ajaxDelete({
+								confirm : "Deleting this user will also remove associated roles and permissions. Are you sure you want to delete?",
+								url : "${request.contextPath}/admin/user/delete"
+							});
+						}
+					},
+					{
+						text : 'Reset Password',
+						clazz : 'grey',
+						icon : 'fa fa-key',
+						permission : '/admin/user/reset-password',
+						handler : function(){
+							$table.ajax({
+								url : "${request.contextPath}/admin/user/reset-password",
+								confirm : "Confirm password reset?",
+								after : function(){
+									$table.reload();
+								}
+							});
+						}
+					},
+					{
+						text : 'Assign Roles',
+						clazz : 'grey',
+						icon : 'fa fa-cog',
+						permission : '/admin/user-role',
+						handler : function(d){
+							$.aceRedirect("${request.contextPath}/admin/user-role?userId=" + d.id);
+						}
+					}
+				],
+				after : function(){
+					// Permission handling
+					$.permission();
+				}
+			});
+
+			// Search
+			$(".search-data").keyup(function () {
+				$table.search();
+			});
+
+			// Cancel
+			$("#_cancel").click(function(){
+				$table.search();
+			});
+
+			var setting = {
+				view: { selectedMulti: true },
+				async: {
+					enable: true,
+					contentType: "application/x-www-form-urlencoded",
+					type: "get",
+					dataType: "text",
+					url: "${request.contextPath}/admin/user/office/tree"
+				},
+				data: { simpleData: { enable: true } },
+				callback: {
+					onAsyncSuccess: zTreeOnAsyncSuccess,
+					onClick: zTreeOnClick
+				}
+			};
+
+			// Expand tree after loading
+			function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+				treeObj.expandAll(true);
+			};
+
+			function zTreeOnClick(event, treeId, treeNode){
+				if(!treeNode.id){
+					$("#_officeId").val('');
+				} else {
+					$("#_officeId").val(treeNode.id);
+				}
+				$table.search();
+			}
+
+			var treeObj = $.fn.zTree.init($("#_tree"), setting);
+		});
+	});
+</script>

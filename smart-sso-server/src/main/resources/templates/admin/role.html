@@ -1,0 +1,176 @@
+<title>Role Management</title>
+<#include "../common/common.html"/>
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="widget-box">
+					<div class="widget-header widget-header-small">
+						<h5 class="widget-title lighter">Search Bar</h5>
+					</div>
+
+					<div class="widget-body">
+						<div class="widget-main">
+							<form id="_form" class="form-inline">
+								<label>
+									<label class="control-label" for="form-field-1"> Role Name: </label>
+									<input name="name" type="text" class="form-data input-medium search-data">
+								</label>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="dataTables_wrapper form-inline no-footer">
+						<table id="_table" class="table table-striped table-bordered table-hover dataTable no-footer">
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
+		jQuery(function($) {
+			// Table
+			var $table = $("#_table").table({
+				url : "${request.contextPath}/admin/role/list",
+				formId : "_form",
+				tools : [
+					{
+						text : 'Add New',
+						clazz : 'btn-info',
+						icon : 'fa fa-plus-circle blue',
+						permission : '/admin/role/edit',
+						handler : function(){
+							$.aceRedirect("${request.contextPath}/admin/role/edit");
+						}
+					},
+					{
+						text : 'Disable',
+						clazz : 'btn-warning',
+						icon : 'fa fa-lock orange',
+						permission : '/admin/role/enable',
+						handler : function(){
+							$table.ajaxEnable({url : "${request.contextPath}/admin/role/enable"}, false);
+						}
+					},
+					{
+						text : 'Enable',
+						clazz : 'btn-success',
+						icon : 'fa fa-unlock green',
+						permission : '/admin/role/enable',
+						handler : function(){
+							$table.ajaxEnable({url : "${request.contextPath}/admin/role/enable"}, true);
+						}
+					},
+					{
+						text : 'Delete',
+						clazz : 'btn-danger',
+						icon : 'fa fa-trash-o red',
+						permission : '/admin/role/delete',
+						handler : function(){
+							$table.ajaxDelete({
+								confirm : "Deleting this role will affect associated users and permissions. Are you sure you want to delete it?",
+								url : "${request.contextPath}/admin/role/delete"
+							});
+						}
+					},
+					{
+						text : 'Assign Permissions',
+						clazz : 'btn-default',
+						icon : 'fa fa-cog grey',
+						permission : '/admin/role/allocate',
+						handler : function(){
+							if($table.validateSelected(true)){
+								$.aceRedirect("${request.contextPath}/admin/role-permission?roleId=" + $table.getSelectedItemKeys("id"));
+							}
+						}
+					}
+				],
+				columns : [
+					{field:'id', hide : true},
+					{field:'isEnable', hide : true},
+					{field:'appId', hide : true},
+					{field:'name', title:'Role Name', align:'left'},
+					{field:'description', title:'Description', align:'left', mobileHide : true},
+					{field:'isEnableStr', title:'Enabled', replace : function (d){
+							if(d.isEnable)
+								return "<span class='label label-sm label-success'>Yes</span>";
+							else
+								return "<span class='label label-sm label-warning'>No</span>";
+						}}
+				],
+				operate : [
+					{
+						text : 'Edit',
+						clazz : 'blue',
+						icon : 'fa fa-pencil',
+						permission : '/admin/role/edit',
+						handler : function(d, i){
+							$.aceRedirect("${request.contextPath}/admin/role/edit?id=" + d.id);
+						}
+					},
+					{
+						text : 'Disable',
+						clazz : 'orange',
+						icon : 'fa fa-lock',
+						permission : '/admin/role/enable',
+						handler : function(){
+							$table.ajaxEnable({url : "${request.contextPath}/admin/role/enable"}, false);
+						},
+						show : function(d){
+							return d.isEnable;
+						}
+					},
+					{
+						text : 'Enable',
+						clazz : 'green',
+						icon : 'fa fa-unlock',
+						permission : '/admin/role/enable',
+						handler : function(){
+							$table.ajaxEnable({url : "${request.contextPath}/admin/role/enable"}, true);
+						},
+						show : function(d){
+							return !d.isEnable;
+						}
+					},
+					{
+						text : 'Delete',
+						clazz : 'red',
+						icon : 'fa fa-trash-o',
+						permission : '/admin/role/delete',
+						handler : function(d, i){
+							$table.ajaxDelete({
+								confirm : "Deleting this role will affect associated permissions. Are you sure you want to delete it?",
+								url : "${request.contextPath}/admin/role/delete"
+							});
+						}
+					},
+					{
+						text : 'Assign Permissions',
+						clazz : 'grey',
+						icon : 'fa fa-cog',
+						permission : '/admin/role/allocate',
+						handler : function(d, i){
+							$.aceRedirect("${request.contextPath}/admin/role-permission?roleId=" + d.id);
+						}
+					}
+				],
+				after : function(){
+					// Permission handling
+					$.permission();
+				}
+			});
+
+			// Search
+			$(".search-data").keyup(function () {
+				$table.search();
+			});
+		});
+	});
+</script>

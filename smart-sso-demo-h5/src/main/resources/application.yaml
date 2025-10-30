@@ -1,0 +1,17 @@
+server:
+  port: 8082
+
+#spring:
+#  data:
+#    redis:
+#      host: 127.0.0.1
+#      port: 6379
+#      password: 123456
+
+smart:
+  sso:
+    server-url: http://localhost:8080
+    client-id: 1002
+    client-secret: 3vjPTgn+9XwV+Q6PRUA5oQ==
+    exclude-urls: /auth/*
+    h5-enabled: true
