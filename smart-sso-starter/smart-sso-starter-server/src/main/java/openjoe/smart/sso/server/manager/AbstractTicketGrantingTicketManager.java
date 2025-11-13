@@ -22,12 +22,7 @@ public abstract class AbstractTicketGrantingTicketManager implements LifecycleMa
         this.tokenManager = tokenManager;
     }
 
-    /**
-     * 登录成功后，根据用户信息创建令牌
-     *
-     * @param userId
-     * @return
-     */
+
     String create(String tgt, Long userId) {
         create(tgt, new TicketGrantingTicketContent(userId, System.currentTimeMillis()));
         return tgt;
@@ -101,12 +96,6 @@ public abstract class AbstractTicketGrantingTicketManager implements LifecycleMa
         this.cookieName = cookieName;
     }
 
-    /**
-     * Refresh expiration
-     *
-     * @param tgt
-     * @return
-     */
     public abstract void refresh(String tgt);
 
     public abstract Map<String, TicketGrantingTicketContent> getTgtMap(Set<Long> userIds, Long current, Long size);

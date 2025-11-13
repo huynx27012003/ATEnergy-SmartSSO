@@ -5,30 +5,17 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
- * 分页实体
- * 注：避免ORM异构带来的RPC分页实体转换
- * * @author huynx */
+
 public class Page<T> {
 
-    /**
-     * 返回记录列表
-     */
+   
     protected List<T> records;
 
-    /**
-     * 总记录数
-     */
+    
     protected long total;
 
-    /**
-     * 当前页
-     */
     protected long current;
 
-    /**
-     * 每页记录数
-     */
     protected long size;
 
     public Page() {

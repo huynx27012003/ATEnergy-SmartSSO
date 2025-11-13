@@ -8,9 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-/**
- * 树接口
- *  * @author huynx */
 public interface Tree {
 	
 	Long getParentId();

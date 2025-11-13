@@ -19,17 +19,17 @@ public class TokenUser {
     /**
      * Granted permissions for this user in current app
      */
-    private java.util.Set<String> permissions;
+//    private java.util.Set<String> permissions;
 
     /**
      * Not-granted permissions (to help hide menus/buttons on client)
      */
-    private java.util.Set<String> noPermissions;
+//    private java.util.Set<String> noPermissions;
 
     /**
      * Menus associated with granted permissions
      */
-    private java.util.List<TokenMenu> menuList;
+//    private java.util.List<TokenMenu> menuList;
 
     public TokenUser() {
     }
@@ -63,28 +63,28 @@ public class TokenUser {
     public void setRoles(java.util.List<String> roles) {
         this.roles = roles;
     }
+//
+//    public java.util.Set<String> getPermissions() {
+//        return permissions;
+//    }
+//
+//    public void setPermissions(java.util.Set<String> permissions) {
+//        this.permissions = permissions;
+//    }
+//
+//    public java.util.Set<String> getNoPermissions() {
+//        return noPermissions;
+//    }
+//
+//    public void setNoPermissions(java.util.Set<String> noPermissions) {
+//        this.noPermissions = noPermissions;
+//    }
 
-    public java.util.Set<String> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(java.util.Set<String> permissions) {
-        this.permissions = permissions;
-    }
-
-    public java.util.Set<String> getNoPermissions() {
-        return noPermissions;
-    }
-
-    public void setNoPermissions(java.util.Set<String> noPermissions) {
-        this.noPermissions = noPermissions;
-    }
-
-    public java.util.List<TokenMenu> getMenuList() {
-        return menuList;
-    }
-
-    public void setMenuList(java.util.List<TokenMenu> menuList) {
-        this.menuList = menuList;
-    }
+//    public java.util.List<TokenMenu> getMenuList() {
+//        return menuList;
+//    }
+//
+//    public void setMenuList(java.util.List<TokenMenu> menuList) {
+//        this.menuList = menuList;
+//    }
 }

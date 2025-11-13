@@ -32,7 +32,8 @@ smart:
     mybatis-plus:
       pageDbType: postgresql
   sso:
-    server-url: http://localhost:8086
+    server-url: http://103.163.118.212:30832
+#    server-url: http://localhost:8086
     client-id: 1000
     client-secret: rokY9BdKh5bHiX/zL26qOg==
     exclude-urls: /static/*,/sso/*

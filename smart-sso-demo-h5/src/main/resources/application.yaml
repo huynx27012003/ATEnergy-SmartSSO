@@ -10,7 +10,7 @@ server:
 
 smart:
   sso:
-    server-url: http://localhost:8080
+    server-url: http://localhost:8086
     client-id: 1002
     client-secret: 3vjPTgn+9XwV+Q6PRUA5oQ==
     exclude-urls: /auth/*

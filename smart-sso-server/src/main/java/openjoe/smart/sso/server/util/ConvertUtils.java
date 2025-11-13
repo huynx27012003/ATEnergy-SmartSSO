@@ -13,13 +13,7 @@ import java.util.stream.Stream;
 
 public class ConvertUtils {
 
-    /**
-     * List对象转换
-     *
-     * @param collection 集合
-     * @param function   对象转换方法
-     * @return
-     */
+  
     public static <T, E> List<E> convert(Collection<T> collection, Function<? super T, ? extends E> function) {
         if (CollectionUtils.isEmpty(collection)) {
             return Collections.emptyList();

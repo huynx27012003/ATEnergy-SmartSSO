@@ -47,19 +47,16 @@ public class SSOUtils {
     private static String getAccessToken() {
         HttpServletRequest request = ClientContextHolder.getRequest();
         String tokenName = getTokenName();
-        // 从cookie中获取当前accessToken
         String accessToken = CookieUtils.getCookieValue(tokenName, request);
         if (StringUtils.hasLength(accessToken)) {
             return accessToken;
         }
-        // 从header中获取当前accessToken
         return request.getHeader(tokenName);
     }
 
     public static Result<Token> getHttpAccessTokenInCookie(String code) {
         Result<Token> result = getHttpAccessToken(code);
         if (result.isSuccess()) {
-            // 写入cookie
             addCookieAccessToken(result.getData().getAccessToken());
         }
         return result;
@@ -79,9 +76,7 @@ public class SSOUtils {
                 properties.getClientSecret(), code, getLocalUrl() + properties.getLogoutPath());
         if (result.isSuccess()) {
             Token token = result.getData();
-            // 将token存储到本地
             tokenStorage.create(token);
-            // 用accessToken请求用户权限信息，存储到本地
             TokenPermission tokenPermission = getHttpTokenPermission(token.getAccessToken());
             tokenPermissionStorage.create(token, tokenPermission);
         } else {
@@ -103,14 +98,11 @@ public class SSOUtils {
     public static Result<Token> getHttpRefreshTokenInCookie(String refreshToken) {
         Result<Token> result = getHttpRefreshToken(refreshToken);
         if (result.isSuccess()) {
-            // Response写入cookie
             addCookieAccessToken(result.getData().getAccessToken());
-            // 更新当前Request中Cookie的token值，让之后的请求能在Cookie中拿到新的token值。
             CookieUtils.updateCookie(getTokenName(), result.getData().getAccessToken(), ClientContextHolder.getRequest());
         }
         return result;
     }
-
 
     public static Result<Token> getHttpRefreshToken(String refreshToken) {
         String accessToken = tokenStorage.getAccessToken(refreshToken);
@@ -123,14 +115,10 @@ public class SSOUtils {
         }
         Result<Token> result = OAuth2Utils.getRefreshToken(properties.getServerUrl(), properties.getClientId(), refreshToken);
         if (result.isSuccess()) {
-            // 删除旧token
             tokenStorage.remove(accessToken);
-            // 删除旧用户权限信息
             tokenPermissionStorage.remove(accessToken);
 
-            // 将token存储到本地
             tokenStorage.create(result.getData());
-            // 存储用户权限信息到本地
             tokenPermissionStorage.create(result.getData(), tokenPermission);
         } else {
             logger.error("getHttpRefreshToken has error, message:{}", result.getMessage());

@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-/**
- * 单点登录管理
- * * @author huynx */
+
 @Controller
 @RequestMapping(BaseConstant.LOGIN_PATH)
 public class SSOLoginController {
@@ -34,14 +32,7 @@ public class SSOLoginController {
     @Autowired
     private AppManager appManager;
 
-    /**
-     * 登录页
-     *
-     * @param redirectUri
-     * @param clientId
-     * @param request
-     * @return
-     */
+    
     @RequestMapping(method = RequestMethod.GET)
     public String login(
             @RequestParam(value = BaseConstant.REDIRECT_URI) String redirectUri,
@@ -54,18 +45,7 @@ public class SSOLoginController {
         return generateCodeAndRedirect(tgt, clientId, redirectUri);
     }
 
-    /**
-     * 登录提交
-     *
-     * @param redirectUri
-     * @param clientId
-     * @param username
-     * @param password
-     * @param request
-     * @param response
-     * @return
-     * @throws UnsupportedEncodingException
-     */
+    
     @RequestMapping(method = RequestMethod.POST)
     public String login(
             @RequestParam(value = BaseConstant.REDIRECT_URI) String redirectUri,
@@ -90,42 +70,19 @@ public class SSOLoginController {
         return generateCodeAndRedirect(tgt, clientId, redirectUri);
     }
 
-    /**
-     * 设置request的redirectUri和clientId参数，跳转到登录页
-     *
-     * @param redirectUri
-     * @param request
-     * @return
-     */
     private String goLoginPage(String redirectUri, String clientId, HttpServletRequest request) {
         request.setAttribute(BaseConstant.REDIRECT_URI, redirectUri);
         request.setAttribute(BaseConstant.CLIENT_ID, clientId);
         return "/login";
     }
 
-    /**
-     * 创建授权码，跳转到redirectUri
-     *
-     * @param tgt
-     * @param clientId
-     * @param redirectUri
-     * @return
-     * @throws UnsupportedEncodingException
-     */
+  
     private String generateCodeAndRedirect(String tgt, String clientId, String redirectUri) throws UnsupportedEncodingException {
-        // 创建授权码
         String code = codeManager.create(tgt, clientId);
         return "redirect:" + authRedirectUri(redirectUri, code);
     }
 
-    /**
-     * 将授权码拼接到回调redirectUri中
-     *
-     * @param redirectUri
-     * @param code
-     * @return
-     * @throws UnsupportedEncodingException
-     */
+   
     private String authRedirectUri(String redirectUri, String code) throws UnsupportedEncodingException {
         StringBuilder sbf = new StringBuilder(redirectUri);
         if (redirectUri.indexOf("?") > -1) {

@@ -8,15 +8,10 @@ import openjoe.smart.sso.client.util.ClientContextHolder;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Base class for client filters
- * * @author huynx */
 public abstract class AbstractClientFilter {
 
     /**
      * Whether the request is allowed to proceed
-     *
-     * @return
      */
     public abstract boolean isAccessAllowed() throws IOException;
 

@@ -88,11 +88,11 @@ public class SSOOAuth2Controller {
         if (appIdResult.isSuccess()) {
             TokenUser tu = userResult.getData();
             openjoe.smart.sso.base.entity.TokenPermission tp = permissionManager.getUserPermission(tgtContent.getUserId(), appIdResult.getData());
-            if (tp != null) {
-                tu.setPermissions(tp.getPermissionSet());
-                tu.setNoPermissions(tp.getNoPermissionSet());
-                tu.setMenuList(tp.getMenuList());
-            }
+//            if (tp != null) {
+//                tu.setPermissions(tp.getPermissionSet());
+//                tu.setNoPermissions(tp.getNoPermissionSet());
+//                tu.setMenuList(tp.getMenuList());
+//            }
         }
 
         // Return token
@@ -153,20 +153,18 @@ public class SSOOAuth2Controller {
         if (appIdResult.isSuccess()) {
             TokenUser tu = userResult.getData();
             openjoe.smart.sso.base.entity.TokenPermission tp = permissionManager.getUserPermission(userId, appIdResult.getData());
-            if (tp != null) {
-                tu.setPermissions(tp.getPermissionSet());
-                tu.setNoPermissions(tp.getNoPermissionSet());
-                tu.setMenuList(tp.getMenuList());
-            }
+//            if (tp != null) {
+//                tu.setPermissions(tp.getPermissionSet());
+//                tu.setNoPermissions(tp.getNoPermissionSet());
+//                tu.setMenuList(tp.getMenuList());
+//            }
         }
 
         return Result.success(new Token(tc.getAccessToken(), tokenManager.getAccessTokenTimeout(), tc.getRefreshToken(),
                 tokenManager.getRefreshTokenTimeout(), userResult.getData()));
     }
 
-    /**
-     * Refresh access token using refresh token
-     */
+
     @ApiOperation("Refresh access token by refreshToken")
     @RequestMapping(value = "/refresh-token", method = RequestMethod.GET)
     public Result<Token> getRefreshToken(
@@ -199,11 +197,11 @@ public class SSOOAuth2Controller {
         if (appIdResult.isSuccess()) {
             TokenUser tu = userResult.getData();
             openjoe.smart.sso.base.entity.TokenPermission tp = permissionManager.getUserPermission(atContent.getUserId(), appIdResult.getData());
-            if (tp != null) {
-                tu.setPermissions(tp.getPermissionSet());
-                tu.setNoPermissions(tp.getNoPermissionSet());
-                tu.setMenuList(tp.getMenuList());
-            }
+//            if (tp != null) {
+////                tu.setPermissions(tp.getPermissionSet());
+////                tu.setNoPermissions(tp.getNoPermissionSet());
+//                tu.setMenuList(tp.getMenuList());
+//            }
         }
 
         // Return new token

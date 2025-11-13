@@ -5,27 +5,16 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import openjoe.smart.sso.server.stage.core.Tree;
 import openjoe.smart.sso.server.stage.mybatisplus.entity.BaseEntity;
 
-/**
- * 权限
- *  * @author huynx */
 @TableName("sys_permission")
 public class Permission extends BaseEntity implements Tree {
 
-	/** 应用ID */
 	private Long appId;
-	/** 父ID */
 	private Long parentId;
-	/** 图标 */
 	private String icon;
-	/** 名称 */
 	private String name;
-	/** 权限URL */
 	private String url;
-	/** 排序 */
 	private Integer sort;
-	/** 是否菜单 */
 	private Boolean isMenu;
-	/** 是否启用 */
 	private Boolean isEnable;
 	
 	public Long getAppId() {

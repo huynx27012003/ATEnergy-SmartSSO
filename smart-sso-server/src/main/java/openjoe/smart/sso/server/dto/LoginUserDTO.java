@@ -4,17 +4,11 @@ import java.util.Date;
 
 public class LoginUserDTO {
 
-    // 用户ID
     private Long id;
-    /** 姓名 */
     private String name;
-    /** 登录名 */
     private String account;
-    /** 登录凭证 */
     private String tgt;
-    /** 凭证创建时间 */
     private Date createTime;
-    /** 已访问应用 */
     private String apps;
 
     public Long getId() {

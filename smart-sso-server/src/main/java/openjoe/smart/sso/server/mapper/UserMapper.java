@@ -3,8 +3,6 @@ package openjoe.smart.sso.server.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import openjoe.smart.sso.server.entity.User;
 
-/**
- * 用户持久化接口
- *  * @author huynx */
+
 public interface UserMapper extends BaseMapper<User> {
 }

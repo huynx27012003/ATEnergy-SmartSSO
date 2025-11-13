@@ -3,19 +3,13 @@ package openjoe.smart.sso.server.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import openjoe.smart.sso.server.stage.mybatisplus.entity.BaseEntity;
 
-/**
- * 角色
- *  * @author huynx */
+
 @TableName("sys_role")
 public class Role extends BaseEntity {
 
-	/** 名称 */
 	private String name;
-	/** 排序 */
 	private Integer sort;
-	/** 描述 */
 	private String description;
-	/** 是否启用 */
 	private Boolean isEnable;
 
 	public String getName() {

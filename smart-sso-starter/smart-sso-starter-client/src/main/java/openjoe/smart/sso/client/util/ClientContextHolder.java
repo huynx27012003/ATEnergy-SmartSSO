@@ -7,9 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
-/**
- * 客户端上下文
- * * @author huynx */
+
 public class ClientContextHolder {
 
     private static final ThreadLocal<ClientContext> CLIENT_CONTEXT = new ThreadLocal<>();
@@ -30,11 +28,7 @@ public class ClientContextHolder {
         return Optional.ofNullable(get()).map(ClientContext::getResponse).orElse(null);
     }
 
-    /**
-     * 获取当前登录用户id
-     *
-     * @return
-     */
+  
     public static Long getUserId() {
         return Optional.ofNullable(getUser()).map(TokenUser::getId).orElse(null);
     }
@@ -46,11 +40,7 @@ public class ClientContextHolder {
         }
     }
 
-    /**
-     * 获取当前登录用户信息
-     *
-     * @return
-     */
+   
     public static TokenUser getUser() {
         return Optional.ofNullable(get()).map(ClientContext::getUser).orElse(null);
     }
@@ -62,11 +52,6 @@ public class ClientContextHolder {
         }
     }
 
-    /**
-     * 获取当前登录用户权限信息
-     *
-     * @return
-     */
     public static TokenPermission getPermission() {
         return Optional.ofNullable(get()).map(ClientContext::getPermission).orElse(null);
     }

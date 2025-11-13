@@ -35,13 +35,6 @@ public class CookieUtils {
         return null;
     }
 
-    /**
-     * Get cookie value by name
-     *
-     * @param request
-     * @param name
-     * @return
-     */
     public static String getCookieValue(String name, HttpServletRequest request) {
         Cookie cookie = getCookie(name, request);
         return cookie == null ? null : cookie.getValue();

@@ -12,20 +12,12 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Permission utilities
- * * @author huynx */
+
 public class PermissionUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(PermissionUtils.class);
 
-    /**
-     * Get all permissions for the current user (including menus)
-     *
-     * @param serverUrl
-     * @param accessToken
-     * @return
-     */
+  
     public static Result<TokenPermission> getUserPermission(String serverUrl, String accessToken) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put(BaseConstant.ACCESS_TOKEN, accessToken);

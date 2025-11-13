@@ -248,11 +248,7 @@
                         localStorage.clear();
                         try { if (!$('#_ssoLoginBtn').length) { renderLoginButton(); } } catch(e) {}
                     }
-                    /**
-                     * accessToken已过期，refreshToken已过期，客户端需要调用refreshToken刷新accessToken
-                     * 1、如果refreshToken成功，之前因为accessToken过期请求失败的接口再发起一遍
-                     * 2、否则，跳转至认证中心
-                     */
+
                     else if (res.code == 15) {
                         if (getRefreshToken()) {
                             smart.ajax(method, url, data, successFn);

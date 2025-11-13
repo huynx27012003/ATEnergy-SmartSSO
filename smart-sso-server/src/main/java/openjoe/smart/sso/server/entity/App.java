@@ -3,23 +3,14 @@ package openjoe.smart.sso.server.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import openjoe.smart.sso.server.stage.mybatisplus.entity.BaseEntity;
 
-/**
- * 应用
- *  * @author huynx */
 @TableName("sys_app")
 public class App extends BaseEntity {
 	
-	/** 名称 */
 	private String name;
-	/** 编码  */
 	private String code;
-	/** 排序 */
 	private Integer sort;
-	/** 是否启用 */
 	private Boolean isEnable;
-	/** 客户端ID */
 	private String clientId;
-	/** 客户端密钥 */
 	private String clientSecret;
 	
 	public String getName() {

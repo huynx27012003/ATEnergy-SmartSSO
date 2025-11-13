@@ -15,9 +15,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * 客户端装配
- * * @author huynx */
+
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({ClientProperties.class})
 public class ClientAutoConfiguration {

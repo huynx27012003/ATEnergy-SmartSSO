@@ -3,9 +3,7 @@ package openjoe.smart.sso.server.stage.exception;
 import openjoe.smart.sso.server.stage.core.IErrorCode;
 import openjoe.smart.sso.server.stage.core.Message;
 
-/**
- * 应用服务异常
- */
+
 public class ApplicationException extends CommonException {
 
     public ApplicationException(Integer code) {

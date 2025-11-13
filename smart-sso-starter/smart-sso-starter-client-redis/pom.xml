@@ -12,7 +12,6 @@
 	<name>${project.artifactId}</name>
 	
 	<dependencies>
-		<!-- sso单点登录客户端 -->
 		<dependency>
 			<groupId>io.github.openjoe</groupId>
 			<artifactId>smart-sso-starter-client</artifactId>

@@ -27,13 +27,6 @@ public class AdminController {
     @Autowired
     private ClientProperties clientProperties;
 
-    /**
-     * 初始页
-     *
-     * @param model
-     * @return
-     * @throws UnsupportedEncodingException
-     */
     @GetMapping
     public String index(Model model) throws UnsupportedEncodingException {
         TokenUser user = ClientContextHolder.getUser();

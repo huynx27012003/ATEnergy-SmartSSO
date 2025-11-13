@@ -6,9 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 
-/**
- * MybatisPlus基础持久化基类
- * * @author huynx */
+
 public class BaseEntity extends Entity {
 
     public static String CREATE_TIME = "createTime";

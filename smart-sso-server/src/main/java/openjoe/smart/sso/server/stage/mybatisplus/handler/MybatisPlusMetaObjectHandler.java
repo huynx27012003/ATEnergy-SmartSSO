@@ -8,11 +8,7 @@ import java.util.Date;
 
 public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
 
-    /**
-     * 插入数据填充公共数据
-     *
-     * @param metaObject
-     */
+   
     @Override
     public void insertFill(MetaObject metaObject) {
         Date now = getNow();
@@ -24,11 +20,7 @@ public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
         }
     }
 
-    /**
-     * 更新数据填充公共数据
-     *
-     * @param metaObject
-     */
+
     @Override
     public void updateFill(MetaObject metaObject) {
         Date now = getNow();

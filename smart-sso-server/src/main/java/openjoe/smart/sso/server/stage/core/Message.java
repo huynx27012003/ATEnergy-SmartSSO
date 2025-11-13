@@ -5,9 +5,7 @@ import java.text.MessageFormat;
 
 public abstract class Message {
 
-    /**
-     * 定义默认实现
-     */
+   
     protected static final Message DEFAULT = new Message() {
 
         @Override
@@ -23,9 +21,6 @@ public abstract class Message {
         }
     };
 
-    /**
-     * 当前实例，可通过子类赋值覆盖
-     */
     protected static Message local = DEFAULT;
 
     public static String get(String key, Object... args) {

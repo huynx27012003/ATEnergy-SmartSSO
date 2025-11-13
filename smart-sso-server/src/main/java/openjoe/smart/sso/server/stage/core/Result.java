@@ -2,24 +2,14 @@ package openjoe.smart.sso.server.stage.core;
 
 import java.beans.Transient;
 
-/**
- * 响应结果
- */
+
 public class Result<T> {
 
-	/**
-	 * 响应码
-	 */
+	
 	private Integer code;
 
-	/**
-	 * 消息
-	 */
 	private String message;
 
-	/**
-	 * 数据
-	 */
 	private T data;
 
 	public Result() {

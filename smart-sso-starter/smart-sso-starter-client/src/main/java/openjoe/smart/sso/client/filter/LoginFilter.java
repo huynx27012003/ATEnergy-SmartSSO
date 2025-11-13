@@ -14,9 +14,6 @@ import org.springframework.core.annotation.Order;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * Single Sign-On Filter
- * * @author huynx */
 @Order(20)
 public class LoginFilter extends AbstractClientFilter {
 
@@ -75,12 +72,7 @@ public class LoginFilter extends AbstractClientFilter {
         return false;
     }
 
-    /**
-     * Store token into client context
-     *
-     * @param token
-     * @return
-     */
+
     private boolean holderToken(Token token) {
         TokenPermission permission = SSOUtils.getTokenPermission(token.getAccessToken());
         if (permission == null) {
@@ -91,11 +83,7 @@ public class LoginFilter extends AbstractClientFilter {
         return true;
     }
 
-    /**
-     * Redirect to server login page
-     *
-     * @throws IOException
-     */
+
     private void redirectLogin() throws IOException {
         if (isAjaxRequest()) {
             responseJson(ClientConstant.NO_LOGIN, "Not logged in or session timed out");
@@ -105,11 +93,6 @@ public class LoginFilter extends AbstractClientFilter {
         }
     }
 
-    /**
-     * Get current request URL
-     *
-     * @return
-     */
     public static String getCurrentUrl() {
         HttpServletRequest request = ClientContextHolder.getRequest();
         StringBuilder urlBuilder = new StringBuilder(request.getRequestURL());
@@ -120,22 +103,13 @@ public class LoginFilter extends AbstractClientFilter {
         return urlBuilder.toString();
     }
 
-    /**
-     * Remove code parameter from the current URL
-     *
-     * @return
-     * @throws IOException
-     */
+
     private void redirectLocalRemoveCode() throws IOException {
         String currentUrl = getCurrentUrl();
         currentUrl = currentUrl.substring(0, currentUrl.indexOf(BaseConstant.AUTH_CODE) - 1);
         ClientContextHolder.getResponse().sendRedirect(currentUrl);
     }
 
-    /**
-     * Determine if request is an AJAX request
-     * @return
-     */
     protected boolean isAjaxRequest() {
         return "XMLHttpRequest".equals(ClientContextHolder.getRequest().getHeader("X-Requested-With"));
     }

@@ -1,8 +1,6 @@
 package openjoe.smart.sso.base.entity;
 
-/**
- * Token object returned from server
- * * @author huynx */
+
 public class Token {
 
     /**

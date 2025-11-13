@@ -8,17 +8,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-/**
- * 树DTO
- * * @author huynx */
+
 public class TreeDTO implements Tree {
-    // ID
     private Long id;
-    // 父ID
     private Long parentId;
-    // 名称
     private String name;
-    // 孩子节点
     private List<TreeDTO> children = new ArrayList<>();
 
     public TreeDTO() {

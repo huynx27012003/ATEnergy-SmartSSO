@@ -13,10 +13,57 @@
 
 	<style>
 		/* Popup-friendly minimal layout when query has popup=true */
+		/* Make both popup and normal login pages white */
+		.login-layout { background-color: #fff !important; }
+		.login-layout.popup { background-color: #fff !important; }
 		.login-layout.popup .center,
 		.login-layout.popup .navbar-fixed-top { display: none !important; }
 		.login-layout.popup .login-container { margin-top: 15px; }
 		.login-layout.popup .main-container { padding-top: 0; }
+
+		/* Small logo used inside header */
+		.login-logo { height: 20px; width: 20px; margin-right: 8px; vertical-align: text-bottom; }
+
+		/* Big circular logo on top */
+		.top-logo { text-align: center; margin: 6px 0 14px; }
+		.top-logo-img {
+			/* Outer circle size */
+			width: 80px; height: 80px;
+			border-radius: 50%;
+			/* Make inner image a bit smaller to fit nicely */
+			padding: 6px;
+			box-sizing: border-box;
+			object-fit: contain; /* ensure full logo visible */
+			background: #fff;
+			border: 3px solid #e6e6e6;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+		}
+
+		/* Make the widget/form container pure white */
+		.login-layout .widget-box .widget-main { background: #ffffff !important; }
+		.login-layout .widget-box { background-color: transparent !important; }
+
+		/* Bold title and primary button color */
+		.login-title { font-weight: 500;
+						text-align: center;
+ 						 width: 100% !important; }
+		.login-layout .btn-primary,
+		.login-layout .btn-primary:active,
+		.login-layout .btn-primary.active,
+		.login-layout .open > .dropdown-toggle.btn-primary {
+			background-color: #012596 !important;
+			border-color: #012596 !important;
+			color: #ffffff !important;
+		}
+		.login-layout .btn-primary:hover,
+		.login-layout .btn-primary:focus {
+			background-color: #001e7a !important; /* slightly darker */
+			border-color: #001e7a !important;
+			color: #ffffff !important;
+		}
+
+		/* Powered by label under the logo */
+		.powered-by { text-align:center; color:#012596; font-size:12px; margin: 4px 0 10px; }
 	</style>
 
 	<script type="text/javascript">
@@ -55,24 +102,23 @@
 
 <body class="login-layout">
 <script>
-  // Apply popup class when opened as a small OAuth2 dialog
-  (function(){
-    if (window.location.search.indexOf('popup=true') !== -1) {
-      document.addEventListener('DOMContentLoaded', function(){
-        try { document.body.classList.add('popup'); } catch(e){}
-      });
-    }
-  })();
-  </script>
+	(function () {
+		if (window.location.search.indexOf('popup=true') !== -1) {
+			document.addEventListener('DOMContentLoaded', function () {
+				try { document.body.classList.add('popup'); } catch (e) { }
+			});
+		}
+	})();
+</script>
 <div class="main-container">
 	<div class="main-content">
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class="login-container">
 					<div class="center">
-						<h1>
-							AT Energy Smart-SSO
-						</h1>
+						<!-- <h1>
+							ATEnergy Smart-SSO
+						</h1> -->
 					</div>
 
 
@@ -83,10 +129,12 @@
 						<div id="login-box" class="login-box visible widget-box no-border">
 							<div class="widget-body">
 								<div class="widget-main">
-									<h4 class="header blue lighter bigger">
-										<i class="ace-icon fa fa-coffee green"></i>
-										Please enter your login information
-									</h4>
+									<!-- Top circular logo -->
+									<div class="top-logo">
+										<img class="top-logo-img" src="${request.contextPath}/static/assets/img/logo.png" alt="Logo" />
+									</div>
+									<h5 class="powered-by">Empowered by ATEnergy</h5>
+									<h4 class="header blue lighter bigger login-title">Login to continue</h4>
 
 									<div class="space-6"></div>
 
@@ -136,15 +184,15 @@
 					<div class="navbar-fixed-top align-right">
 						<br />
 						&nbsp;
-						<a id="btn-login-dark" href="#">Dark</a>
+						<a id="btn-login-dark" href="#">Light</a>
 						&nbsp;
 						<span class="blue">/</span>
 						&nbsp;
-						<a id="btn-login-blur" href="#">Blur</a>
+						<a id="btn-login-blur" href="#">Dark</a>
 						&nbsp;
 						<span class="blue">/</span>
 						&nbsp;
-						<a id="btn-login-light" href="#">Light</a>
+						<a id="btn-login-light" href="#">Blur</a>
 						&nbsp; &nbsp; &nbsp;
 					</div>
 				</div>

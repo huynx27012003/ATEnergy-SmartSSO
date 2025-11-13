@@ -6,19 +6,12 @@ import openjoe.smart.sso.server.stage.mybatisplus.entity.BaseEntity;
 
 import java.beans.Transient;
 
-/**
- * 机构
- */
 @TableName("sys_office")
 public class Office extends BaseEntity {
 	
-	/** 父ID */
 	private Long parentId;
-	/** 名称 */
 	private String name;
-	/** 排序 */
 	private Integer sort;
-	/** 是否启用 */
 	private Boolean isEnable;
 
 	public Long getParentId() {

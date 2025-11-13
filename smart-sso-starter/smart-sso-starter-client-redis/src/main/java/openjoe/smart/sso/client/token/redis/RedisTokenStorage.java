@@ -33,7 +33,8 @@ public final class RedisTokenStorage implements TokenStorage {
         redisTemplate.opsForValue().set(
                 REFRESH_TOKEN_KEY +
                         wrapper.getObject().getRefreshToken(),
-                        accessToken, wrapper.getObject().getRefreshExpiresIn(),
+                        accessToken,
+                        wrapper.getObject().getRefreshExpiresIn(),
                         TimeUnit.SECONDS);
         logger.debug("Redis service token created successfully, accessToken:{}", accessToken);
     }

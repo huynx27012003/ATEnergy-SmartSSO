@@ -3,13 +3,10 @@ package openjoe.smart.sso.server.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import openjoe.smart.sso.server.stage.mybatisplus.entity.Entity;
 
-/**
- * 角色权限映射
- *  * @author huynx */
+
 @TableName("sys_role_permission")
 public class RolePermission extends Entity {
 
-	/** 应用ID */
 	private Long appId;
 	private Long roleId;
 	private Long permissionId;

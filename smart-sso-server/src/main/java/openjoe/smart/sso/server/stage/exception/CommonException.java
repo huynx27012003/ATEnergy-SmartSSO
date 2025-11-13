@@ -2,9 +2,7 @@ package openjoe.smart.sso.server.stage.exception;
 
 import openjoe.smart.sso.server.stage.core.ResultEnum;
 
-/**
- * 异常基类
- */
+
 public class CommonException extends RuntimeException {
 
     private Integer code;

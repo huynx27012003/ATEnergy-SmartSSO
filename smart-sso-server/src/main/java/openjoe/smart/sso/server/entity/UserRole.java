@@ -3,15 +3,10 @@ package openjoe.smart.sso.server.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import openjoe.smart.sso.server.stage.mybatisplus.entity.Entity;
 
-/**
- * 用户角色映射
- *  * @author huynx */
 @TableName("sys_user_role")
 public class UserRole extends Entity {
 
-	/** 用户ID */
 	private Long userId;
-	/** 角色ID */
 	private Long roleId;
 
 	public Long getUserId() {

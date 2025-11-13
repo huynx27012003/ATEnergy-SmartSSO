@@ -21,8 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * HTTP utilities
- * * @author huynx */
+ * HTTP utilities  */
 public class HttpUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);

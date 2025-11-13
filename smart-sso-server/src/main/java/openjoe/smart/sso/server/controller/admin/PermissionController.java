@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+
 @Api(tags = "Permission (including menu) Management")
 @Controller
 @RequestMapping("/admin/permission")
